@@ -1,0 +1,39 @@
+<script>
+  function changeStatus(ele, id) {
+    $.ajax({
+      url: `/todos/${id}/update_status`,
+      data: {status: $(ele).val()},
+      method: 'post',
+      success: function(result) {
+        $('#success-message2').html('Status updated to '+ result["status"]);
+        $('#alert-success').show();
+      }
+    })
+  }
+</script>
+<h1>Todos</h1>
+<% @todos.keys.each_with_index do |project, index|%>
+  <span> <%= index+1%>. </span>
+  <span> <%= project %></span>
+  <table class="table pl-2">
+    <thead>
+      <tr>
+        <td></td>
+        <td>Descrption</td>
+        <td>Status</td>
+      </tr>
+    </thead>
+    <tbody>
+    <%@todos[project].each_with_index do |todo, ind|%>
+      <tr>
+      <td width="10%"><%= ind+1 %></td>
+      <td width="60%"><%= todo.description%></td>
+      <td width="30%">
+        <%= select("todo", "status", [['New', 'New'], ['InProgress', 'InProgress'],['Done', 'Done']], { selected: todo.status},
+        onchange: "changeStatus(this,#{todo.id})") %>
+      </td>
+      </tr>
+    <% end%>
+    </tbody>
+  </table>
+<% end %>

@@ -1,0 +1,47 @@
+<div id="projects_list">
+	<% projects.each_with_index do |project, index| %>
+	 <div class="card card-body mb-2">
+      <div class="row m-0">
+		 	  <span class="mr-1"> <%= index+1 %></span>
+			  <%= link_to project.name, project_path(project) %>
+			  <%=link_to '<i class = "fa fa-pencil"></i>'.html_safe, edit_project_path(project), class: "ml-3", remote: true %>
+			</div>
+		 	<div style="overflow-x:auto;">
+			 	<table class="table table-bordered">
+				 	<thead>
+				 		<tr>
+				 			<td width="20%">Status</td>
+				 			<% project.developers.each do |dev|%>
+				 				<td><%= dev.name%></td>
+				 			<%end%>
+				 			<% unless project.developers.exists? %>
+				 				<td> No Developers assigned</td>
+				 			<% end %>
+				 		</tr>
+				 	</thead>
+				 	<tbody>
+				 		<% row_todos = project.todos.group_by{|t| t.status}%>
+            
+				 		<% ['Done', 'InProgress', 'New'].each do |status| %>
+				 			<tr>
+						 		<td><%= status %></td>
+						 		<% col_todos = row_todos[status].group_by{|t| t.developer} if row_todos[status].present?%>
+						 		<% project.developers.each do |dev|%>
+						 			<%# t = dev.todos.group_by{|g| g.status}%>
+						 			<td>
+						 				<%= col_todos.try(:[], dev).to_a.map(&:description).join('<br>').html_safe %>
+						 			</td>
+						 		<%end%>
+						 		<% unless project.developers.exists? %>
+					 				<td></td>
+					 			<% end %>
+						 	</tr>
+				 		<% end %>
+				 	</tbody>
+			  </table>
+			</div>
+    </div>
+	<% end %>
+</div>
+
+

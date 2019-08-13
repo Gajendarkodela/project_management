@@ -1,0 +1,6 @@
+<div class="float-right mb-3">
+  <%= link_to 'new developer', new_developer_path, class:"btn btn-primary", remote: true%>
+</div>
+<h2> Developers </h2>
+<%= render partial: 'developers_list',locals: { developers: @developers}%>
+<div id="developer-div"></div>

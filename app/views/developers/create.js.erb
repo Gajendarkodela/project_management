@@ -1,0 +1,10 @@
+<% if @developer.errors.any? %>
+	<% @developer.errors.keys.each do |e| %>
+		$('input[name="developer[' + "<%= e%>" +']"]').after('<small class="text-danger">'+'<%= @developer.errors[e][0] %>'+'</small>');
+	<% end %>
+<% else %>
+  $('#developer_form').modal('hide');
+	$('#success-message2').html('successfully created');
+  $('#alert-success').show();
+  $('#projects_list').html("<%=j render partial: 'developers_list', locals: {developers: @developers}%>");
+<% end %>

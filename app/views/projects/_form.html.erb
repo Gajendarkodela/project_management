@@ -1,0 +1,25 @@
+<div class="modal fade" id="project_form" tabindex="-1" role="dialog"aria-labelledby="myModalLabel"   aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold edit-module"><%= @project.new_record? ? 'Create Project' : 'Update Project'%></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form">
+          <div class="project-form">
+            <%= form_for(@project, remote: true)do |f| %>
+            	<%= f.text_field :name, class: "form-control", placeholder:"Project name", autofocus: true, autocomplete: "project", required: true%>
+            	<small class="text-danger" id="name-error"></small>
+            	<div class="float-right mt-2">
+            		<%= f.submit @project.new_record? ? "Create" : 'Update', class:"btn btn-primary"%>
+            	</div>
+            <% end %>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>

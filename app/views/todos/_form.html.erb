@@ -1,0 +1,47 @@
+<div class="modal fade" id="todo_form" tabindex="-1" role="dialog"aria-labelledby="myModalLabel"   aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold edit-module"><%= @todo.new_record? ? 'Create Todo' : 'Update Todo'%></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form">
+          <div class="project-form">
+            <%= form_with(model: @todo) do |form| %>
+              <% if @todo.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+                  <ul>
+                  <% @todo.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="field">
+                <%= form.text_area :description, id: :todo_description, class: "form-control", placeholder:"Description", autofocus: true, autocomplete: "description", required: true %>
+              </div>
+              <%= form.hidden_field :project_id%>
+              <div class="field mt-2">
+                <%= form.select(:developer_id, {}, {}, {class:  "form-control"}) do%>
+                  <option> --Select developer(optional) -- </option>
+                  <% @project.developers.each do |c| -%>
+                    <%= content_tag(:option, c.name, value: c.id, selected: c.id == @todo.developer_id) %>
+                  <% end %> 
+                <% end %>
+              </div>
+              <div class="actions mt-2 float-right">
+                <%= form.submit 'Submit', class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

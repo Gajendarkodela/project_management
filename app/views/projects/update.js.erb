@@ -1,0 +1,9 @@
+<% if @project.errors.any? %>
+	$('#name-error').html('name is already taken or invalid');
+<%else%>
+	$('#name-error').html('');
+	$('#project_form').modal('hide');
+	$('#alert-success').show();
+	$('#success-message2').html('Project Updated successfully');
+	$('#projects_list').html('<%=j render partial: "projects_list",locals: { projects: @projects}%>')
+<% end %>
