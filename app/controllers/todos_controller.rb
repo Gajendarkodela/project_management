@@ -75,7 +75,7 @@ class TodosController < ApplicationController
   end
 
   def authenticate_developer
-    return if current_user.type == 'Developer'
+    return if current_user.developer?
     redirect_to root_path, notice: "Only developer can access this page"
   end
 

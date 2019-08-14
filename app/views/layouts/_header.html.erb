@@ -2,7 +2,7 @@
     <% a= controller.action_name %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-promo  fixed-top p-0" id="mainNav">
   <a class="navbar-brand ml-3" href="/">  
-    <img src="https://www.fineartpixel.com/wp-content/uploads/edd/2018/04/THUMB_Teamwork.jpg" style="height: 40px; width: 130px;">
+    <%= image_tag 'logo.jpg', style: "height: 40px; width: 130px;"%>
   </a>
   <% if current_user.admin? %>
 	  <a href="/projects" class="header-icon text-white <%= (c == 'projects') ? 'active' : ''%>">

@@ -8,4 +8,8 @@ class User < ApplicationRecord
   def admin?
   	self.type == 'Admin' 
   end
+
+  def developer?
+  	self.type == 'Developer' 
+  end
 end

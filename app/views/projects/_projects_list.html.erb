@@ -22,7 +22,7 @@
 				 	<tbody>
 				 		<% row_todos = project.todos.group_by{|t| t.status}%>
             
-				 		<% ['Done', 'InProgress', 'New'].each do |status| %>
+				 		<% [Todo::Status::DONE, Todo::Status::INPROGRESS, Todo::Status::NEW].each do |status| %>
 				 			<tr>
 						 		<td><%= status %></td>
 						 		<% col_todos = row_todos[status].group_by{|t| t.developer} if row_todos[status].present?%>

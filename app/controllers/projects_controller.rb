@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
 	before_action :authenticate_admin
-	before_action :set_project, only: [:show, :edit, :update, :graph, :destroy, :assign_devs]
+	before_action :set_project, except: [:index, :new, :create]
 	def index
-		@projects = current_user.projects.eager_load(:todos)
+		@projects = current_user.projects.eager_load(:todos, :developers)
 	end
 
 	def show
@@ -30,10 +30,11 @@ class ProjectsController < ApplicationController
 	end
 
 	def graph
+		todos = @project.todos
 		render json: {
-			new: @project.todos.select{|t| t.status=='New'}.count,
-			in_progress: @project.todos.select{|t| t.status=='InProgress'}.count,
-			done: @project.todos.select{|t| t.status=='Done'}.count
+			new: todos.select{|t| t.status == Todo::Status::NEW}.count,
+			in_progress: todos.select{|t| t.status == Todo::Status::INPROGRESS}.count,
+			done: todos.select{|t| t.status == Todo::Status::DONE}.count
 		}
 	end
 
