@@ -10,13 +10,13 @@ This Project is to manages different todos list for Project. system allows you t
 
  **Setup:**
 - **rails db:create**
-  **rails db:migrate**
-  **rails db:seed** 
+- **rails db:migrate**
+- **rails db:seed** 
 
 
-* Configuration
-
-* Database creation
+**Configuration:**
+ 
+** Database creation **
     
     --->> ***database need to be created 'development_projects'***
 
