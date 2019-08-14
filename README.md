@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Project Management]
 
-Things you may want to cover:
+This Project is to manages different todos list for Project. system allows you to assign deelopers to todos and you can view the status at any point of time.
 
-* Ruby version
+ 
+ **Requirements:**
+- **Ruby** 2.5+
 
-* System dependencies
+ **Setup:**
+- **rails db:create**
+  **rails db:migrate**
+  **rails db:seed** 
+
 
 * Configuration
 
 * Database creation
+    
+    --->> ***database need to be created 'development_projects'***
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
